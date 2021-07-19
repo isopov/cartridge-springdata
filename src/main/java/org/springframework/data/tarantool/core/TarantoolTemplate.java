@@ -84,7 +84,8 @@ public class TarantoolTemplate extends BaseTarantoolTemplate {
     public <T> T callForObject(String functionName, List<?> parameters, Class<T> entityClass) {
         return executeSync(
                 () -> tarantoolClient.callForSingleResult(functionName, mapParameters(parameters), entityClass)
-                        .thenApply((value) -> value == null ? null : mapToEntity(value, entityClass))
+                        .thenApply((value) -> value == null ? null
+                                : mapToEntity(value, entityClass))
         );
     }
 
